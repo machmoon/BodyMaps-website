@@ -3,5 +3,5 @@
 set -e
 cd "$(dirname "$0")"
 xcodegen generate --quiet
-DD=${1:-/tmp/lumen-dd}
+DD=/tmp/lumen-dd  # single shared cache: parallel caches filled the disk
 xcodebuild -project Lumen.xcodeproj -scheme Lumen -destination 'generic/platform=iOS Simulator' -derivedDataPath "$DD" build 2>&1 | grep -E "error:|warning: unre|BUILD (SUCCEEDED|FAILED)" | head -60
